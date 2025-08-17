@@ -5,7 +5,7 @@
   --primary-light: #333333;
   --primary-dark: #000000;
   --secondary-color: #f3eadb; /* Creamy background color */
-  --accent-color: #d4a017; /* Mustard yellow accent */
+  --accent-color: #ebb528; /* Golden yellow accent */
   --secondary-accent: #f0a5f0; /* Pink from palette */
   --text-color: #1a1600; /* Dark color from palette */
   --background-color: #f7f2e8; /* Lighter version of secondary */
@@ -102,7 +102,7 @@ body {
 .language-selector select:focus {
   border-color: var(--accent-color);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(212, 160, 23, 0.2);
+  box-shadow: 0 0 0 2px rgba(235, 181, 40, 0.2);
 }
 
 .lock-button {
@@ -132,12 +132,12 @@ body {
 .lock-button.locked {
   background-color: var(--accent-color);
   border-color: var(--accent-color);
-  box-shadow: 0 2px 8px rgba(212, 160, 23, 0.3);
+  box-shadow: 0 2px 8px rgba(235, 181, 40, 0.3);
 }
 
 .lock-button.locked:hover {
-  background-color: #b8901f;
-  border-color: #b8901f;
+  background-color: #d4a020;
+  border-color: #d4a020;
 }
 
 .lock-icon {
@@ -478,7 +478,7 @@ body {
 }
 
 .retry-button:hover {
-  background-color: #b8901f;
+  background-color: #d4a020;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
