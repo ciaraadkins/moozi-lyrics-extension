@@ -74,6 +74,7 @@ body {
   font-weight: bold;
   margin: 0;
   font-family: var(--title-font);
+  color: var(--accent-color);
 }
 
 .header-controls {
