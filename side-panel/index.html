@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moozi Lyrics Translator</title>
+  <link rel="stylesheet" href="../styles/side-panel.css">
+</head>
+<body>
+  <div class="moozi-container">
+    <header class="moozi-header">
+      <div class="logo-container">
+        <img src="../icons/icon-48.png" alt="Moozi Lyrics" class="logo">
+        <h1>Moozi Lyrics</h1>
+      </div>
+      
+      <div class="language-selector">
+        <label for="language-select">Translate to:</label>
+        <select id="language-select">
+          <option value="" disabled selected>Select Language</option>
+          <!-- Language options will be populated by JS -->
+        </select>
+      </div>
+    </header>
+    
+    <main class="moozi-content">
+      <div class="instructions" id="instructions-panel">
+        <h2>How to use</h2>
+        <p>Select lyrics on any webpage to translate them.</p>
+        <p>Choose your target language above and we'll provide:</p>
+        <ul>
+          <li>Line-by-line translation</li>
+          <li>Cultural context & meaning</li>
+        </ul>
+      </div>
+      
+      <div class="no-selection" id="no-selection-panel">
+        <p>No lyrics selected yet.</p>
+        <p>Highlight some text on the page to see the translation.</p>
+      </div>
+      
+      <div class="loading-panel" id="loading-panel" style="display: none;">
+        <div class="spinner"></div>
+        <p>Translating lyrics...</p>
+      </div>
+      
+      <div class="translation-panel" id="translation-panel" style="display: none;">
+        <div class="song-info" id="song-info">
+          <!-- Song metadata will appear here if available -->
+        </div>
+        
+        <div class="lyrics-container" id="lyrics-container">
+          <!-- Table will be inserted here by JavaScript -->
+        </div>
+        
+        <div class="explanation-container">
+          <h3>Song Meaning</h3>
+          <div id="lyrics-explanation" class="explanation-text"></div>
+        </div>
+      </div>
+      
+      <div class="error-panel" id="error-panel" style="display: none;">
+        <p class="error-message" id="error-message">Something went wrong with the translation.</p>
+        <button id="retry-button" class="retry-button">Retry</button>
+      </div>
+    </main>
+    
+    <footer class="moozi-footer">
+      <p>Made with ♥ by Moozi Lyrics</p>
+    </footer>
+  </div>
+  
+  <script src="../lib/languages.js"></script>
+  <script src="../lib/translator.js"></script>
+  <script src="side-panel.js"></script>
+</body>
+</html>

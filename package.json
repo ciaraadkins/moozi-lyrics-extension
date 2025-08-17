@@ -1,0 +1,19 @@
+{
+  "name": "moozi-lyrics-extension",
+  "version": "1.0.0",
+  "description": "Translate and explain song lyrics on any webpage",
+  "main": "background/service-worker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"No build step required\""
+  },
+  "keywords": [
+    "lyrics",
+    "translation",
+    "music",
+    "chrome-extension"
+  ],
+  "author": "Ciara Adkins",
+  "license": "MIT",
+  "dependencies": {}
+}
