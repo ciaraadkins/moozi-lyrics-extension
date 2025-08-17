@@ -1,6 +1,6 @@
 {
   "name": "moozi-lyrics-extension",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Translate and explain song lyrics on any webpage",
   "main": "background/service-worker.js",
   "scripts": {
