@@ -15,6 +15,9 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.action.onClicked.addListener((tab) => {
   // Open the side panel when the extension icon is clicked
   chrome.sidePanel.open({ tabId: tab.id });
+  
+  // Request the content script to process any selected text
+  chrome.tabs.sendMessage(tab.id, { action: 'processSelectedText' });
 });
 
 // Listen for messages from content script or side panel
@@ -26,18 +29,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     
     // If we have basic metadata but we want to validate it with an LLM
     if (metadata && (metadata.songTitle || metadata.artistName)) {
-      // First store and display what we have
+      // Store the highlighted text (only if side panel is open)
       chrome.storage.local.set({ 
         highlightedText: message.text,
         selectionMetadata: metadata
       });
       
-      // Open the side panel if it's not already open
-      if (sender && sender.tab) {
-        chrome.sidePanel.open({ tabId: sender.tab.id });
-      }
-      
-      // Forward the highlighted text to the side panel
+      // Forward the highlighted text to the side panel (if it's open)
       chrome.runtime.sendMessage({
         action: 'displayHighlightedText',
         text: message.text,
@@ -70,18 +68,13 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
           // We still have the original metadata, so no need to notify user
         });
     } else {
-      // No metadata to enhance, just process normally
+      // No metadata to enhance, just process normally (only if side panel is open)
       chrome.storage.local.set({ 
         highlightedText: message.text,
         selectionMetadata: metadata
       });
       
-      // Open the side panel if it's not already open
-      if (sender && sender.tab) {
-        chrome.sidePanel.open({ tabId: sender.tab.id });
-      }
-      
-      // Forward the highlighted text to the side panel
+      // Forward the highlighted text to the side panel (if it's open)
       chrome.runtime.sendMessage({
         action: 'displayHighlightedText',
         text: message.text,

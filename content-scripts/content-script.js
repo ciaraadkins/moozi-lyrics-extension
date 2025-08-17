@@ -446,8 +446,8 @@ function extractSongInfoGeneric() {
   };
 }
 
-// Function to handle text selection
-function handleTextSelection() {
+// Function to handle text selection (only when manually triggered)
+function processSelectedText() {
   const selection = window.getSelection();
   const selectedText = selection.toString().trim();
   
@@ -461,11 +461,20 @@ function handleTextSelection() {
       text: selectedText,
       metadata: songInfo
     });
+  } else {
+    console.log('No text selected or selection too short');
   }
 }
 
-// Listen for text selections on the page
-document.addEventListener('mouseup', handleTextSelection);
+// Listen for messages from background script
+chrome.runtime.onMessage.addListener((message) => {
+  if (message.action === 'processSelectedText') {
+    processSelectedText();
+  }
+});
+
+// Note: Automatic text selection processing is disabled
+// Text will only be processed when the extension is manually activated
 
 // Optional: Create a floating button for lyrics sites
 if (isLyricsSite()) {
@@ -481,9 +490,15 @@ if (isLyricsSite()) {
   mooziBadge.style.right = '20px';
   mooziBadge.style.zIndex = '9999';
   
-  // Handle click to open side panel
+  // Handle click to open side panel and process selected text
   mooziBadge.addEventListener('click', () => {
+    // Open side panel first
     chrome.runtime.sendMessage({ action: 'openSidePanel' });
+    
+    // Then process any selected text
+    setTimeout(() => {
+      processSelectedText();
+    }, 100); // Small delay to ensure side panel opens first
   });
   
   // Append to body
