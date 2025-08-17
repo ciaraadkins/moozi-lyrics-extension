@@ -1,9 +1,9 @@
 /* Side panel styles for Moozi Lyrics extension */
 
 :root {
-  --primary-color: #2565b7; /* Moozi blue from logo */
-  --primary-light: #3579cf;
-  --primary-dark: #1d5091;
+  --primary-color: #000000; /* Black instead of Moozi blue */
+  --primary-light: #333333;
+  --primary-dark: #000000;
   --secondary-color: #f3eadb; /* Creamy background color */
   --accent-color: #e78f35; /* Orange accent from palette */
   --secondary-accent: #f0a5f0; /* Pink from palette */
@@ -57,7 +57,7 @@ body {
 .logo {
   width: 24px;
   height: 24px;
-  filter: brightness(0) saturate(100%) invert(28%) sepia(75%) saturate(1122%) hue-rotate(196deg) brightness(91%) contrast(89%);
+  filter: brightness(0) saturate(100%) invert(100%);
 }
 
 .moozi-header h1 {
