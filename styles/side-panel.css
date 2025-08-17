@@ -1,5 +1,36 @@
 /* Side panel styles for Moozi Lyrics extension */
 
+/* Custom Font Declarations */
+@font-face {
+  font-family: 'CustomSerif';
+  src: url('../fonts/YourFont-Regular.woff2') format('woff2'),
+       url('../fonts/YourFont-Regular.woff') format('woff'),
+       url('../fonts/YourFont-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CustomSerif';
+  src: url('../fonts/YourFont-Bold.woff2') format('woff2'),
+       url('../fonts/YourFont-Bold.woff') format('woff'),
+       url('../fonts/YourFont-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CustomSerif';
+  src: url('../fonts/YourFont-Italic.woff2') format('woff2'),
+       url('../fonts/YourFont-Italic.woff') format('woff'),
+       url('../fonts/YourFont-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   --primary-color: #000000; /* Black instead of Moozi blue */
   --primary-light: #333333;
@@ -13,7 +44,7 @@
   --success-color: #4CAF50;
   --error-color: #f44336;
   --fixel-font: 'Fixel Display', 'Arial', sans-serif;
-  --soria-font: 'Soria', 'Times New Roman', serif;
+  --soria-font: 'CustomSerif', 'Times New Roman', serif;
 }
 
 * {
