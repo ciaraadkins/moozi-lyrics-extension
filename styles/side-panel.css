@@ -60,21 +60,17 @@ body {
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 10px;
-}
-
-.logo {
-  width: 24px;
-  height: 24px;
-  filter: brightness(0) saturate(100%) invert(100%);
+  justify-content: center;
+  width: 100%;
 }
 
 .moozi-header h1 {
-  font-size: 18px;
+  font-size: 22px;
   font-weight: bold;
   margin: 0;
   font-family: var(--title-font);
   color: var(--accent-color);
+  text-align: center;
 }
 
 .header-controls {
