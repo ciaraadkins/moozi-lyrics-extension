@@ -2,32 +2,10 @@
 
 /* Custom Font Declarations */
 @font-face {
-  font-family: 'CustomSerif';
-  src: url('../fonts/YourFont-Regular.woff2') format('woff2'),
-       url('../fonts/YourFont-Regular.woff') format('woff'),
-       url('../fonts/YourFont-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'CustomSerif';
-  src: url('../fonts/YourFont-Bold.woff2') format('woff2'),
-       url('../fonts/YourFont-Bold.woff') format('woff'),
-       url('../fonts/YourFont-Bold.ttf') format('truetype');
+  font-family: 'Rohn';
+  src: url('../fonts/Rohn-Bold.otf') format('opentype');
   font-weight: bold;
   font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'CustomSerif';
-  src: url('../fonts/YourFont-Italic.woff2') format('woff2'),
-       url('../fonts/YourFont-Italic.woff') format('woff'),
-       url('../fonts/YourFont-Italic.ttf') format('truetype');
-  font-weight: normal;
-  font-style: italic;
   font-display: swap;
 }
 
@@ -44,7 +22,7 @@
   --success-color: #4CAF50;
   --error-color: #f44336;
   --fixel-font: 'Fixel Display', 'Arial', sans-serif;
-  --soria-font: 'CustomSerif', 'Times New Roman', serif;
+  --title-font: 'Rohn', 'Arial Black', sans-serif;
 }
 
 * {
@@ -95,7 +73,7 @@ body {
   font-size: 18px;
   font-weight: bold;
   margin: 0;
-  font-family: var(--soria-font);
+  font-family: var(--title-font);
 }
 
 .header-controls {
@@ -284,7 +262,8 @@ body {
 .song-info h2 {
   font-size: 18px;
   color: var(--primary-color);
-  font-family: var(--soria-font);
+  font-family: var(--title-font);
+  font-weight: bold;
   margin-bottom: 4px;
 }
 
@@ -520,7 +499,7 @@ body {
   text-align: center;
   font-size: 12px;
   color: #666;
-  font-family: var(--soria-font);
+  font-family: var(--fixel-font);
 }
 
 /* Responsive styles for different side panel widths */
