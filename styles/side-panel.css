@@ -67,10 +67,17 @@ body {
   font-family: var(--soria-font);
 }
 
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .language-selector {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-grow: 1;
 }
 
 .language-selector label {
@@ -98,11 +105,85 @@ body {
   box-shadow: 0 0 0 2px rgba(231, 143, 53, 0.2);
 }
 
+.lock-button {
+  background: none;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  min-width: 40px;
+  height: 36px;
+}
+
+.lock-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.05);
+}
+
+.lock-button:active {
+  transform: scale(0.95);
+}
+
+.lock-button.locked {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  box-shadow: 0 2px 8px rgba(231, 143, 53, 0.3);
+}
+
+.lock-button.locked:hover {
+  background-color: #c87d2e;
+  border-color: #c87d2e;
+}
+
+.lock-icon {
+  font-size: 20px;
+  display: inline-block;
+  transition: transform 0.3s ease;
+  line-height: 1;
+}
+
+.lock-button.locked .lock-icon {
+  transform: rotate(10deg);
+}
+
+.lock-button:not(.locked) .lock-icon {
+  transform: rotate(-10deg);
+}
+
+.lock-button:hover .lock-icon {
+  transform: rotate(0deg);
+}
+
 /* Main Content Styles */
 .moozi-content {
   flex: 1;
   overflow-y: auto;
   padding: 16px;
+  position: relative;
+  transition: opacity 0.3s ease;
+}
+
+.moozi-content.view-locked::before {
+  content: "🔒 View Locked";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  z-index: 100;
+  opacity: 0.9;
+  font-family: var(--fixel-font);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .instructions h2 {

@@ -12,13 +12,17 @@ const lyricsContainer = document.getElementById('lyrics-container');
 const lyricsExplanationElement = document.getElementById('lyrics-explanation');
 const errorMessageElement = document.getElementById('error-message');
 const retryButton = document.getElementById('retry-button');
+const lockButton = document.getElementById('lock-button');
+const lockIcon = lockButton ? lockButton.querySelector('.lock-icon') : null;
+const mooziContent = document.querySelector('.moozi-content');
 
 // State
 let currentState = {
   highlightedText: '',
   songMetadata: {},
   selectedLanguage: '',
-  translationData: null
+  translationData: null,
+  viewLocked: false
 };
 
 // Initialize
@@ -29,11 +33,17 @@ function initialize() {
   // Set initial UI state
   showPanel('no-selection');
   
-  // Check for any stored language preference
-  chrome.storage.local.get(['preferredLanguage'], (result) => {
+  // Check for any stored language preference and lock state
+  chrome.storage.local.get(['preferredLanguage', 'viewLocked'], (result) => {
     if (result.preferredLanguage) {
       languageSelect.value = result.preferredLanguage;
       currentState.selectedLanguage = result.preferredLanguage;
+    }
+    
+    // Restore lock state
+    if (result.viewLocked) {
+      currentState.viewLocked = result.viewLocked;
+      updateLockUI(result.viewLocked);
     }
   });
   
@@ -99,6 +109,11 @@ function setupEventListeners() {
     }
   });
   
+  // Lock button click
+  lockButton.addEventListener('click', () => {
+    toggleViewLock();
+  });
+  
   // Retry button
   retryButton.addEventListener('click', () => {
     requestTranslation();
@@ -107,6 +122,12 @@ function setupEventListeners() {
   // Listen for messages from background script
   chrome.runtime.onMessage.addListener((message) => {
     if (message.action === 'displayHighlightedText') {
+      // Check if view is locked
+      if (currentState.viewLocked) {
+        console.log('View is locked, ignoring new selection');
+        return; // Ignore new selections when locked
+      }
+      
       // Update our state with the highlighted text
       currentState.highlightedText = message.text;
       currentState.songMetadata = message.metadata || {};
@@ -137,6 +158,12 @@ function setupEventListeners() {
       handleTranslationError(message.error);
     }
     else if (message.action === 'metadataEnhanced') {
+      // Check if view is locked
+      if (currentState.viewLocked) {
+        console.log('View is locked, ignoring metadata update');
+        return; // Ignore metadata updates when locked
+      }
+      
       // Handle the case where metadata was enhanced by the LLM
       handleEnhancedMetadata(message.metadata);
     }
@@ -416,6 +443,51 @@ function showPanel(panelName) {
       break;
     default:
       noSelectionPanel.style.display = 'block';
+  }
+}
+
+// Toggle view lock state
+function toggleViewLock() {
+  currentState.viewLocked = !currentState.viewLocked;
+  
+  // Save the lock state
+  chrome.storage.local.set({ viewLocked: currentState.viewLocked });
+  
+  // Update UI
+  updateLockUI(currentState.viewLocked);
+  
+  // Log the state change
+  console.log(`View lock ${currentState.viewLocked ? 'enabled' : 'disabled'}`);
+}
+
+// Update lock button UI based on state
+function updateLockUI(isLocked) {
+  if (!lockButton || !lockIcon) return;
+  
+  if (isLocked) {
+    lockButton.classList.add('locked');
+    lockButton.title = 'Unlock view';
+    lockButton.setAttribute('aria-label', 'Unlock view');
+    lockIcon.textContent = '🔒';
+    lockIcon.classList.remove('unlocked');
+    lockIcon.classList.add('locked');
+    
+    // Add locked indicator to content area
+    if (mooziContent) {
+      mooziContent.classList.add('view-locked');
+    }
+  } else {
+    lockButton.classList.remove('locked');
+    lockButton.title = 'Lock view';
+    lockButton.setAttribute('aria-label', 'Lock view');
+    lockIcon.textContent = '🔓';
+    lockIcon.classList.remove('locked');
+    lockIcon.classList.add('unlocked');
+    
+    // Remove locked indicator from content area
+    if (mooziContent) {
+      mooziContent.classList.remove('view-locked');
+    }
   }
 }
 

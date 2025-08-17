@@ -14,12 +14,18 @@
         <h1>Moozi Lyrics</h1>
       </div>
       
-      <div class="language-selector">
-        <label for="language-select">Translate to:</label>
-        <select id="language-select">
-          <option value="" disabled selected>Select Language</option>
-          <!-- Language options will be populated by JS -->
-        </select>
+      <div class="header-controls">
+        <div class="language-selector">
+          <label for="language-select">Translate to:</label>
+          <select id="language-select">
+            <option value="" disabled selected>Select Language</option>
+            <!-- Language options will be populated by JS -->
+          </select>
+        </div>
+        
+        <button id="lock-button" class="lock-button" title="Lock view" aria-label="Lock view">
+          <span class="lock-icon unlocked">🔓</span>
+        </button>
       </div>
     </header>
     
